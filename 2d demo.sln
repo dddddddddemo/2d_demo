@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2d demo.Editor.Plugins", "2d demo.Editor.Plugins.csproj", "{14F21DD9-8DF5-F036-FA70-4DAFDBBD3BC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2d demo", "2d demo.csproj", "{B3DE68C4-BA69-C365-DBA2-9A4D153E2C89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14F21DD9-8DF5-F036-FA70-4DAFDBBD3BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14F21DD9-8DF5-F036-FA70-4DAFDBBD3BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14F21DD9-8DF5-F036-FA70-4DAFDBBD3BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14F21DD9-8DF5-F036-FA70-4DAFDBBD3BC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3DE68C4-BA69-C365-DBA2-9A4D153E2C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3DE68C4-BA69-C365-DBA2-9A4D153E2C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3DE68C4-BA69-C365-DBA2-9A4D153E2C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3DE68C4-BA69-C365-DBA2-9A4D153E2C89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

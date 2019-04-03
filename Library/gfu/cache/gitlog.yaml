@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -530159753, guid: 68c7e4565cde54155bb78d8e935f1dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheType: 3
+  lastUpdatedAtString: 2019-04-03T00:38:26.925-07:00
+  initializedAtString: 2019-04-03T00:37:56.997-07:00
+  log:
+  - commitID: 090031684c30b8a95110b1a178a41332c92ec206
+    mergeA: 
+    mergeB: 
+    authorName: Jerry
+    authorEmail: tshao@scu,edu
+    commitEmail: tshao@scu,edu
+    commitName: Jerry
+    summary: Revert "Initial commit"
+    description: This reverts commit 4cc07fb7adf58e36eaa0e9fa431127dd73c5322b.
+    timeString: 2019-04-03T00:38:26.000-07:00
+    commitTimeString: 2019-04-03T00:38:26.000-07:00
+    changes:
+    - path: .gitattributes
+      fullPath: C:\Users\tshao\Desktop\2d demo\2d demo\.gitattributes
+      projectPath: .gitattributes
+      originalPath: 
+      status: 5
+      staged: 0
+    - path: .gitignore
+      fullPath: C:\Users\tshao\Desktop\2d demo\2d demo\.gitignore
+      projectPath: .gitignore
+      originalPath: 
+      status: 5
+      staged: 0
+    - path: Assets\.gitignore
+      fullPath: C:\Users\tshao\Desktop\2d demo\2d demo\Assets\.gitignore
+      projectPath: Assets\.gitignore
+      originalPath: 
+      status: 5
+      staged: 0
+  - commitID: 4cc07fb7adf58e36eaa0e9fa431127dd73c5322b
+    mergeA: 
+    mergeB: 
+    authorName: Jerry
+    authorEmail: tshao@scu,edu
+    commitEmail: tshao@scu,edu
+    commitName: Jerry
+    summary: Initial commit
+    description: 
+    timeString: 2019-04-03T00:37:56.000-07:00
+    commitTimeString: 2019-04-03T00:37:56.000-07:00
+    changes:
+    - path: .gitattributes
+      fullPath: C:\Users\tshao\Desktop\2d demo\2d demo\.gitattributes
+      projectPath: .gitattributes
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: .gitignore
+      fullPath: C:\Users\tshao\Desktop\2d demo\2d demo\.gitignore
+      projectPath: .gitignore
+      originalPath: 
+      status: 4
+      staged: 0
+    - path: Assets\.gitignore
+      fullPath: C:\Users\tshao\Desktop\2d demo\2d demo\Assets\.gitignore
+      projectPath: Assets\.gitignore
+      originalPath: 
+      status: 4
+      staged: 0
