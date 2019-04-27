@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
 
     public float jumpSpeed = 15f;
     public float springSpeed = 30f;
+    public float deceleration = 10f;
+
     public Transform springPrefab;
 
     public float gravity = 1f;
 
-    public float distance = 0.15f;
+    public float distanceBetweenBlocks = 0.05f;
 
     public bool isGround = false;
     private Vector2 moveSpeed = Vector2.zero;
@@ -35,7 +37,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        /*if (other.gameObject.tag.CompareTo("Trap") == 0)
+        /*
+        if (other.gameObject.tag.CompareTo("Trap") == 0)
         {
             Debug.Log("Trigger enter trap");
             Die();
@@ -44,7 +47,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Trigger enter spring");
             this.moveSpeed.y = springSpeed;
-        }*/
+        }
+        */
         if (other.gameObject.tag.CompareTo("Win") == 0)
         {
             if (winText != null)
@@ -61,32 +65,26 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.tag.CompareTo("Spring") == 0)
         {
-            Vector2 contact_normal = collision.contacts[0].normal;
-            if (contact_normal.y==1)
-            {
-                Debug.Log("collision enter spring up"); 
-            }
-            else if (contact_normal.y == -1)
-            {
-                Debug.Log("collision enter spring down");
-            }
-            else if (contact_normal.x == 1)
-            {
-                Debug.Log("collision enter spring right");
-            }
-            else if (contact_normal.x == -1)
-            {
-                Debug.Log("collision enter spring left");
-            }
-            Debug.Log("collision enter spring");
-            this.moveSpeed.x = springSpeed*contact_normal.x;
-            this.moveSpeed.y = springSpeed*contact_normal.y;
+            Vector2 contactNormal = collision.contacts[0].normal;
+
+            Debug.LogFormat("contactNormal:({0} {1})", contactNormal.x, contactNormal.y);
+
+            this.moveSpeed.x = springSpeed * contactNormal.x;
+            this.moveSpeed.y = springSpeed * contactNormal.y;
         }
     }
 
     private void HorizontalUpdate()
     {
-        this.moveSpeed.x = Input.GetAxis("Horizontal") * speed;
+        // init horizontal speed;
+        if (Mathf.Abs(this.moveSpeed.x) > speed)
+        {
+            float deltaSpeed = deceleration * Time.deltaTime;
+            this.moveSpeed.x -= this.moveSpeed.x > 0 ? deltaSpeed : -deltaSpeed;
+        }
+        else
+            this.moveSpeed.x = Input.GetAxis("Horizontal") * speed;
+
         if (this.moveSpeed.x != 0)
         {
             float nextX = this.transform.position.x + moveSpeed.x * Time.deltaTime;
@@ -96,14 +94,15 @@ public class Player : MonoBehaviour
             if (hit2d.collider != null)
             {
                 float nextDis = Mathf.Abs(nextX - hit2d.point.x);
-                float minDis = distance + this.boxSize.x * 0.5f;
+                float minDis = distanceBetweenBlocks + this.boxSize.x * 0.5f;
 
                 // if touch the wall
                 if (nextDis <= minDis + 0.02f) // +0.02 防止鬼畜
                 {
                     nextX = this.moveSpeed.x > 0 ? (hit2d.point.x - minDis) : (hit2d.point.x + minDis);
                     this.moveSpeed.y = 0;
-                    gravity = 0.33f;
+                    this.moveSpeed.x = 0; // horizontal speed should be 0 when hit the wall
+                    gravity = 0.33f; // todo
                 }
                 else
                 {
@@ -117,19 +116,17 @@ public class Player : MonoBehaviour
 
     private void CheckIsGround()
     {
-        RaycastHit2D hit2d = Physics2D.BoxCast(this.transform.position, this.boxSize, 0f, Vector2.down, distance, this.layerMask);
+        RaycastHit2D hit2d = Physics2D.BoxCast(this.transform.position, this.boxSize, 0f, Vector2.down, distanceBetweenBlocks, this.layerMask);
         this.isGround = hit2d.collider != null;
     }
 
     private void VerticalUpdate()
     {
         if (isGround && Input.GetKeyDown(KeyCode.Space))
-        {
-                moveSpeed.y = jumpSpeed;
-        }
+            moveSpeed.y = jumpSpeed;
         else
             moveSpeed.y = Mathf.Max(-jumpSpeed, moveSpeed.y - gravity);
-           
+
         if (this.moveSpeed.y != 0)
         {
             float nextY = this.transform.position.y + moveSpeed.y * Time.deltaTime;
@@ -138,11 +135,11 @@ public class Player : MonoBehaviour
             RaycastHit2D hit2d = Physics2D.BoxCast(this.transform.position, this.boxSize, 0, direction, detectDistance, this.layerMask);
             if (hit2d.collider != null)
             {
-                // float curDis = Vector2.Distance(this.transform.position, hit2d.point);
+                // float curDis = Vector2.distance(this.transform.position, hit2d.point);
                 float nextDis = Mathf.Abs(this.transform.position.y - hit2d.point.y);
                 nextDis -= Mathf.Abs(moveSpeed.y) * Time.deltaTime;
                 // Debug.Log(nextDis);
-                float minDis = distance + this.boxSize.y * 0.5f;
+                float minDis = distanceBetweenBlocks + this.boxSize.y * 0.5f;
                 if (nextDis <= minDis + 0.02f) // +0.02 防止鬼畜
                 {
                     nextY = this.moveSpeed.y > 0 ? (hit2d.point.y - minDis) : (hit2d.point.y + minDis);
@@ -153,8 +150,8 @@ public class Player : MonoBehaviour
                     Debug.Log(nextY);
 
                 }
-            }        
- 
+            }
+
             this.transform.position = new Vector2(this.transform.position.x, nextY);
         }
 
@@ -215,6 +212,5 @@ public class Player : MonoBehaviour
     }
 
     public GameObject winText;
-
 
 }
